@@ -1,12 +1,15 @@
 import React from 'react';
 import { Bike, Orbit, Footprints } from 'lucide-react';
 
-export default function MyExercises() {
+export default function MyExercises({ onButtonClick }) {
     return (
         <div className="mb-8 relative animate-in fade-in slide-in-from-bottom-4 duration-500">
             <div className="flex justify-between items-center mb-4">
                 <h2 className="text-base font-bold text-zinc-900 uppercase tracking-widest">My exercises</h2>
-                <button className="text-[10px] font-bold text-lime-500 hover:text-lime-600 uppercase tracking-wider transition-colors">
+                <button
+                    onClick={onButtonClick}
+                    className="text-[10px] font-bold text-lime-500 hover:text-lime-600 uppercase tracking-wider transition-colors"
+                >
                     View More
                 </button>
             </div>

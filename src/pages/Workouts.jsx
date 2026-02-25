@@ -10,6 +10,7 @@ import ActiveWorkout from './ActiveWorkout';
 import WorkoutSummary from './WorkoutSummary';
 import StepsDetails from './StepsDetails';
 import MyExercises from '../components/MyExercises';
+import ExercisesList from './ExercisesList';
 
 export default function Workouts({ isNewUser }) {
     const [selectedWorkout, setSelectedWorkout] = useState(null);
@@ -20,6 +21,7 @@ export default function Workouts({ isNewUser }) {
     const [recentWorkouts, setRecentWorkouts] = useState([]);
     const [isLoadingWorkouts, setIsLoadingWorkouts] = useState(true);
     const [isStepsDetailsOpen, setIsStepsDetailsOpen] = useState(false);
+    const [isExercisesListOpen, setIsExercisesListOpen] = useState(false);
 
     useEffect(() => {
         // Load mock data to explore the app without backend dependencies
@@ -83,7 +85,7 @@ export default function Workouts({ isNewUser }) {
 
             <ActivityRings isNewUser={isNewUser} />
             <StreakWidget isNewUser={isNewUser} onClick={() => setIsStepsDetailsOpen(true)} />
-            <MyExercises />
+            <MyExercises onButtonClick={() => setIsExercisesListOpen(true)} />
 
             <div className="mb-8 relative">
                 <div className="flex justify-between items-center mb-4">
@@ -215,6 +217,12 @@ export default function Workouts({ isNewUser }) {
                 <StepsDetails
                     isNewUser={isNewUser}
                     onClose={() => setIsStepsDetailsOpen(false)}
+                />
+            )}
+
+            {isExercisesListOpen && (
+                <ExercisesList
+                    onClose={() => setIsExercisesListOpen(false)}
                 />
             )}
 
