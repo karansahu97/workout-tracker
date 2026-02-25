@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ChevronLeft, Share2, BarChart2, MoreVertical } from 'lucide-react';
+import { ChevronLeft } from 'lucide-react';
 
 export default function StepsDetails({ onClose, isNewUser }) {
     const [animated, setAnimated] = useState(false);
@@ -48,17 +48,6 @@ export default function StepsDetails({ onClose, isNewUser }) {
                         <ChevronLeft size={24} />
                     </button>
                     <h1 className="text-xl font-bold text-zinc-900 tracking-tight">Steps</h1>
-                </div>
-                <div className="flex items-center space-x-3 text-zinc-900">
-                    <button className="w-10 h-10 rounded-full flex items-center justify-center active:bg-zinc-100 transition-colors">
-                        <Share2 size={20} />
-                    </button>
-                    <button className="w-10 h-10 rounded-full flex items-center justify-center active:bg-zinc-100 transition-colors">
-                        <BarChart2 size={20} />
-                    </button>
-                    <button className="w-10 h-10 rounded-full flex items-center justify-center -mr-2 active:bg-zinc-100 transition-colors">
-                        <MoreVertical size={20} />
-                    </button>
                 </div>
             </div>
 
