@@ -37,16 +37,16 @@ export default function Heatmap({ isNewUser }) {
             <div className="flex gap-2">
                 {/* Y-axis: Sun to Sat */}
                 <div
-                    className="grid grid-flow-row gap-[6px] text-[13px] text-[#7B7B98] font-medium mt-[32px] pr-2"
-                    style={{ gridTemplateRows: 'repeat(7, minmax(0, 1fr))' }}
+                    className="grid grid-flow-row gap-[6px] text-[13px] text-[#7B7B98] font-medium mt-[28px] pr-2"
+                    style={{ gridTemplateRows: 'repeat(7, 22px)' }}
                 >
-                    <div className="w-[18px] h-[22px] flex items-center justify-end">S</div>
-                    <div className="w-[18px] h-[22px] flex items-center justify-end">M</div>
-                    <div className="w-[18px] h-[22px] flex items-center justify-end">T</div>
-                    <div className="w-[18px] h-[22px] flex items-center justify-end">W</div>
-                    <div className="w-[18px] h-[22px] flex items-center justify-end">T</div>
-                    <div className="w-[18px] h-[22px] flex items-center justify-end">F</div>
-                    <div className="w-[18px] h-[22px] flex items-center justify-end">S</div>
+                    <div className="flex items-center justify-end">S</div>
+                    <div className="flex items-center justify-end">M</div>
+                    <div className="flex items-center justify-end">T</div>
+                    <div className="flex items-center justify-end">W</div>
+                    <div className="flex items-center justify-end">T</div>
+                    <div className="flex items-center justify-end">F</div>
+                    <div className="flex items-center justify-end">S</div>
                 </div>
 
                 {/* Grid and X-axis container */}
