@@ -1,101 +1,125 @@
-import React, { useState, useEffect } from 'react';
-import { ChevronLeft, Clock, Flame, Dumbbell } from 'lucide-react';
+import React, { useState } from 'react';
+import { ChevronLeft, Clock, Dumbbell, Flame, CheckCircle2, ChevronRight } from 'lucide-react';
+import ExerciseDetails from './ExerciseDetails';
 
 export default function WorkoutDetails({ workout, onBack }) {
-    const [animated, setAnimated] = useState(false);
-
-    useEffect(() => {
-        setTimeout(() => setAnimated(true), 100);
-    }, []);
+    const [selectedExercise, setSelectedExercise] = useState(null);
 
     if (!workout) return null;
 
     const exercisesList = workout.exercisesList || [];
 
-    // Map tags to brand colors
     const getTagStyles = (tag) => {
-        const t = tag?.toUpperCase() || "";
-        if (t === "LEGS") return "bg-[#E3F2FD] text-[#419EF9]"; // Blue
-        if (t === "CARDIO") return "bg-[#FFEBEE] text-[#FA2F68]"; // Crimson
-        if (t === "FULL BODY") return "bg-[#F3E5F5] text-[#9C27B0]"; // Purple
-        if (t === "CHEST") return "bg-[#E8F5E9] text-[#23C91F]"; // Green
-        return "bg-[#FFF3E0] text-[#FF9800]"; // Orange/Back default
+        const upperTag = tag.toUpperCase();
+        switch (upperTag) {
+            case 'BACK':
+            case 'CHEST':
+                return 'border-[#23C91F] text-[#23C91F]'; // Lime Green
+            case 'CORE':
+                return 'border-purple-500 text-purple-600';
+            case 'LEGS':
+                return 'border-[#419EF9] text-[#419EF9]'; // Electric Blue
+            case 'SHOULDERS':
+                return 'border-[#FA2F68] text-[#FA2F68]'; // Neon Crimson
+            case 'TRICEPS':
+            case 'BICEPS':
+                return 'border-orange-500 text-orange-600';
+            default:
+                return 'border-zinc-400 text-zinc-500';
+        }
     };
 
     return (
-        <div className="fixed inset-0 z-50 bg-[#F4F5F7] animate-in slide-in-from-right-full duration-300 overflow-y-auto pb-28">
-            <header className="sticky top-0 z-50 bg-[#F4F5F7]/90 backdrop-blur-md">
-                <div className="flex items-center justify-between p-4">
-                    <button onClick={onBack} className="p-2 -ml-2 text-zinc-900 active:scale-90 transition-transform rounded-full active:bg-zinc-200">
-                        <ChevronLeft size={24} strokeWidth={2.5} />
+        <div className="fixed inset-0 bg-[#F4F5F7] z-50 animate-in slide-in-from-right-full duration-300 overflow-y-auto pb-28">
+            <header className="sticky top-0 z-50 bg-[#F4F5F7]/90 backdrop-blur-md border-b border-black/5">
+                <div className="flex items-center justify-between p-4 px-2">
+                    <button onClick={onBack} className="w-10 h-10 rounded-full flex items-center justify-center text-zinc-900 active:bg-zinc-200 transition-colors">
+                        <ChevronLeft size={24} />
                     </button>
-                    <h1 className="text-sm font-bold uppercase tracking-[0.2em] text-zinc-900 absolute left-1/2 -translate-x-1/2">
-                        Details
+                    <h1 className="text-sm font-bold uppercase tracking-widest text-zinc-900 absolute left-1/2 -translate-x-1/2">
+                        Workout Log
                     </h1>
                 </div>
             </header>
 
-            <main className="px-4 py-2">
-                <div className={`transition-all duration-700 ${animated ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-                    <div className="flex items-center justify-between mb-4 mt-2">
-                        <span className={`text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-full ${getTagStyles(workout.activeTag)}`}>
-                            {workout.activeTag || 'WORKOUT'}
-                        </span>
-                        <span className="text-xs font-semibold text-zinc-400">{workout.date}</span>
+            <main className="px-4 py-8">
+                {/* Header Information */}
+                <div className="mb-8">
+                    <span className="text-sm font-bold text-zinc-500 block mb-3">{workout.date}</span>
+                    <h2 className="text-[28px] font-bold tracking-tight text-zinc-900 mb-6 leading-tight">{workout.title}</h2>
+
+                    <div className="flex flex-wrap gap-2 mb-8">
+                        {workout.activeTags?.map((tag, idx) => (
+                            <span
+                                key={idx}
+                                className={`text-[10px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full border border-opacity-50 ${getTagStyles(tag)}`}
+                            >
+                                {tag}
+                            </span>
+                        ))}
                     </div>
 
-                    <h2 className="text-[28px] font-bold tracking-tight text-zinc-900 mb-8 leading-tight">
-                        {workout.title}
-                    </h2>
-
-                    <div className="grid grid-cols-3 gap-3 mb-10">
-                        {/* Time Card */}
-                        <div className="bg-white rounded-[20px] p-4 shadow-sm border border-black/5 flex flex-col justify-between aspect-square">
-                            <Clock size={18} className="text-[#23C91F] mb-4" strokeWidth={2} />
-                            <div>
-                                <div className="text-lg font-bold font-mono text-zinc-900 tracking-tight">
-                                    {workout.duration.replace('h', 'h ').replace('m', 'm')}
-                                </div>
-                                <div className="text-[9px] text-zinc-400 uppercase tracking-widest font-bold mt-1">Time</div>
-                            </div>
+                    {/* Compressed Stats Row (Replacing the 3 massive cards) */}
+                    <div className="grid grid-cols-3 border-y border-black/5 py-4">
+                        <div className="flex flex-col items-center border-r border-black/5">
+                            <Clock size={16} className="text-[#419EF9] mb-1.5 stroke-[2.5px]" />
+                            <div className="text-xl font-bold font-mono tracking-tight text-zinc-900">{workout.duration}</div>
+                            <div className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest mt-1">Time</div>
                         </div>
-
-                        {/* Kcal Card */}
-                        <div className="bg-white rounded-[20px] p-4 shadow-sm border border-black/5 flex flex-col justify-between aspect-square">
-                            <Flame size={18} className="text-[#23C91F] mb-4" strokeWidth={2} />
-                            <div>
-                                <div className="text-lg font-bold font-mono text-zinc-900 tracking-tight">{workout.kcal}</div>
-                                <div className="text-[9px] text-zinc-400 uppercase tracking-widest font-bold mt-1">Kcal</div>
-                            </div>
+                        <div className="flex flex-col items-center border-r border-black/5">
+                            <Flame size={16} className="text-[#FA2F68] mb-1.5 stroke-[2.5px]" />
+                            <div className="text-xl font-bold font-mono tracking-tight text-zinc-900">{workout.kcal}</div>
+                            <div className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest mt-1">Kcal</div>
                         </div>
-
-                        {/* Kg Moved Card */}
-                        <div className="bg-white rounded-[20px] p-4 shadow-sm border border-black/5 flex flex-col justify-between aspect-square">
-                            <Dumbbell size={18} className="text-[#23C91F] mb-4" strokeWidth={2} />
-                            <div>
-                                <div className="text-lg font-bold font-mono text-zinc-900 tracking-tight">{workout.movedKg}</div>
-                                <div className="text-[9px] text-zinc-400 uppercase tracking-widest font-bold mt-1">Kg Moved</div>
-                            </div>
+                        <div className="flex flex-col items-center">
+                            <Dumbbell size={16} className="text-[#23C91F] mb-1.5 stroke-[2.5px]" />
+                            <div className="text-xl font-bold font-mono tracking-tight text-zinc-900">{workout.movedKg}</div>
+                            <div className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest mt-1">Kg</div>
                         </div>
                     </div>
                 </div>
 
-                <div className={`transition-all duration-700 delay-100 ${animated ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-                    <h3 className="text-xs font-bold text-zinc-900 uppercase tracking-[0.15em] mb-4 px-1">Exercises</h3>
+                {/* Exercises Log */}
+                <div>
+                    <div className="flex items-center justify-between mb-4 px-1">
+                        <h3 className="text-sm font-bold text-zinc-900 uppercase tracking-widest">Exercises Log</h3>
+                        <span className="text-[10px] font-bold text-[#23C91F] bg-[#23C91F]/10 px-2 py-1 rounded uppercase">{exercisesList.length} Exercises</span>
+                    </div>
                     <div className="space-y-3">
-                        {exercisesList.map((ex, index) => (
+                        {exercisesList.map((ex, idx) => (
                             <div
-                                key={ex.id || index}
+                                key={ex.id || idx}
                                 onClick={() => setSelectedExercise(ex)}
-                                className="bg-white rounded-[24px] p-5 shadow-sm border border-black/5 flex items-center justify-between cursor-pointer active:scale-[0.98] transition-all hover:bg-zinc-50"
+                                className="bg-white rounded-[20px] p-5 shadow-sm border border-black/5 flex items-center justify-between cursor-pointer active:scale-[0.98] transition-all hover:bg-zinc-50"
                             >
-                                <h4 className="text-[15px] font-bold text-zinc-900 tracking-tight">{ex.name}</h4>
-                                <div className="w-[22px] h-[22px] rounded-full border-[2.5px] border-zinc-200" />
+                                <div className="flex-1 flex items-start space-x-4">
+                                    <div className="w-8 h-8 flex-shrink-0 rounded-full bg-[#23C91F]/10 flex items-center justify-center text-[#23C91F] mt-0.5 shadow-sm">
+                                        <CheckCircle2 size={16} strokeWidth={3} />
+                                    </div>
+                                    <div>
+                                        <h4 className="text-[15px] font-bold text-zinc-900 mb-1 leading-tight">{ex.name}</h4>
+                                        <div className="flex items-center text-[13px] font-medium text-zinc-400">
+                                            <span>{ex.sets || '3 sets'}</span>
+                                            <span className="mx-2 text-zinc-300">•</span>
+                                            <span className="font-mono font-bold text-zinc-500">{ex.weight || 'Logged'}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="text-zinc-300 ml-4">
+                                    <ChevronRight size={20} />
+                                </div>
                             </div>
                         ))}
                     </div>
                 </div>
             </main>
+
+            {selectedExercise && (
+                <ExerciseDetails
+                    exercise={selectedExercise}
+                    onBack={() => setSelectedExercise(null)}
+                />
+            )}
         </div>
     );
 }
