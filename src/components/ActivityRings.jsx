@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Footprints, Clock, Flame } from 'lucide-react';
 
-export default function ActivityRings({ isNewUser }) {
+export default function ActivityRings({ isNewUser, onClick }) {
     const [animated, setAnimated] = useState(false);
 
     useEffect(() => {
@@ -28,7 +28,10 @@ export default function ActivityRings({ isNewUser }) {
     const r3 = 22; const c3 = 2 * Math.PI * r3;
 
     return (
-        <div className="bg-white rounded-3xl p-6 shadow-sm border border-black/5 mb-6 w-full flex items-center justify-between animate-in fade-in duration-500 overflow-hidden">
+        <div
+            onClick={onClick}
+            className={`bg-white rounded-3xl p-6 shadow-sm border border-black/5 mb-6 w-full flex items-center justify-between animate-in fade-in duration-500 overflow-hidden ${onClick ? 'cursor-pointer active:scale-[0.98] transition-transform' : ''}`}
+        >
             {/* Left side: Metrics */}
             <div className="flex flex-col space-y-4">
                 {/* Steps */}

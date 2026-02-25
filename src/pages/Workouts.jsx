@@ -12,6 +12,7 @@ import StepsDetails from './StepsDetails';
 import MyExercises from '../components/MyExercises';
 import ExercisesList from './ExercisesList';
 import WorkoutThisWeekList from './WorkoutThisWeekList';
+import DailyActivityDetails from './DailyActivityDetails';
 
 export default function Workouts({ isNewUser }) {
     const [selectedWorkout, setSelectedWorkout] = useState(null);
@@ -24,6 +25,7 @@ export default function Workouts({ isNewUser }) {
     const [isStepsDetailsOpen, setIsStepsDetailsOpen] = useState(false);
     const [isExercisesListOpen, setIsExercisesListOpen] = useState(false);
     const [isWorkoutThisWeekOpen, setIsWorkoutThisWeekOpen] = useState(false);
+    const [isDailyActivityDetailsOpen, setIsDailyActivityDetailsOpen] = useState(false);
 
     useEffect(() => {
         // Load mock data to explore the app without backend dependencies
@@ -85,7 +87,10 @@ export default function Workouts({ isNewUser }) {
             )}
 
 
-            <ActivityRings isNewUser={isNewUser} />
+            <ActivityRings
+                isNewUser={isNewUser}
+                onClick={() => setIsDailyActivityDetailsOpen(true)}
+            />
             <StreakWidget isNewUser={isNewUser} onClick={() => setIsStepsDetailsOpen(true)} />
             <MyExercises onButtonClick={() => setIsExercisesListOpen(true)} />
 
@@ -226,6 +231,13 @@ export default function Workouts({ isNewUser }) {
                 <StepsDetails
                     isNewUser={isNewUser}
                     onClose={() => setIsStepsDetailsOpen(false)}
+                />
+            )}
+
+            {isDailyActivityDetailsOpen && (
+                <DailyActivityDetails
+                    isNewUser={isNewUser}
+                    onClose={() => setIsDailyActivityDetailsOpen(false)}
                 />
             )}
 
