@@ -81,7 +81,7 @@ export default function StepsDetails({ onClose, isNewUser }) {
                             <div key={idx} className="flex flex-col items-center justify-end h-full">
                                 <div className="w-3 bg-zinc-300 rounded-full relative overflow-hidden" style={{ height: '70px' }}>
                                     <div
-                                        className={`absolute bottom-0 left-0 right-0 rounded-full transition-all duration-1000 ${day.isSelected ? 'bg-zinc-400' : 'bg-zinc-300'}`}
+                                        className={`absolute bottom-0 left-0 right-0 rounded-full transition-all duration-1000 ${day.isSelected ? 'bg-[#23C91F]' : 'bg-zinc-300'}`}
                                         style={{ height: animated ? day.height : '0%' }}
                                     />
                                 </div>
