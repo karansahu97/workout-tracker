@@ -24,6 +24,7 @@ export default function WorkoutCard({ date, duration, activeTag, title, kcal, mo
                         if (activeTag === "Legs") colorClass = "bg-accent-blue/10 text-accent-blue";
                         if (activeTag === "Cardio") colorClass = "bg-accent-crimson/10 text-accent-crimson";
                         if (activeTag === "Full Body") colorClass = "bg-accent-purple/10 text-accent-purple";
+                        if (activeTag === "BACK") colorClass = "bg-yellow-500/15 text-yellow-600";
 
                         return (
                             <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-full ${colorClass}`}>

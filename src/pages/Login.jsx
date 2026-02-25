@@ -14,7 +14,7 @@ export default function Login({ onLogin }) {
         // Simulate a slight network delay for the loading animation UX
         setTimeout(() => {
             if (userId === 'karansahu' && password === 'karan1234') {
-                onLogin(true); // Successfully authenticated
+                onLogin(false); // Changed to false to show populated mock data
             } else {
                 setError('Invalid User ID or Password');
             }

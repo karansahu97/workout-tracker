@@ -22,16 +22,16 @@ export default function Workouts({ isNewUser }) {
         const mockData = [
             {
                 id: 1,
-                title: "Day 2: Push (Chest, Shoulders, Triceps)",
+                title: "Day 2: Pull (Back & Biceps)",
                 date: "Yesterday, 18:30",
                 duration: "1h 15m",
-                activeTag: "Hypertrophy",
+                activeTag: "BACK",
                 kcal: "450",
                 movedKg: "8,500",
                 exercises: "6",
                 exercisesList: [
-                    { name: "Incline Dumbbell Press", id: 1 },
-                    { name: "Overhead Press", id: 2 },
+                    { name: "Weighted Pull-Ups", id: 1 },
+                    { name: "Barbell Rows", id: 2 },
                 ]
             },
             {
@@ -39,7 +39,7 @@ export default function Workouts({ isNewUser }) {
                 title: "Day 1: Lower Body Power",
                 date: "Monday, 17:00",
                 duration: "1h 30m",
-                activeTag: "Power",
+                activeTag: "LEGS",
                 kcal: "600",
                 movedKg: "12,200",
                 exercises: "5",
