@@ -11,6 +11,7 @@ import WorkoutSummary from './WorkoutSummary';
 import StepsDetails from './StepsDetails';
 import MyExercises from '../components/MyExercises';
 import ExercisesList from './ExercisesList';
+import WorkoutThisWeekList from './WorkoutThisWeekList';
 
 export default function Workouts({ isNewUser }) {
     const [selectedWorkout, setSelectedWorkout] = useState(null);
@@ -22,6 +23,7 @@ export default function Workouts({ isNewUser }) {
     const [isLoadingWorkouts, setIsLoadingWorkouts] = useState(true);
     const [isStepsDetailsOpen, setIsStepsDetailsOpen] = useState(false);
     const [isExercisesListOpen, setIsExercisesListOpen] = useState(false);
+    const [isWorkoutThisWeekOpen, setIsWorkoutThisWeekOpen] = useState(false);
 
     useEffect(() => {
         // Load mock data to explore the app without backend dependencies
@@ -89,8 +91,15 @@ export default function Workouts({ isNewUser }) {
 
             <div className="mb-8 relative">
                 <div className="flex justify-between items-center mb-4">
-                    <h2 className="text-base font-bold text-zinc-900 uppercase tracking-widest">Recent Activity</h2>
-                    {!isNewUser && <button className="text-xs font-bold text-lime-500 uppercase tracking-wider">View All</button>}
+                    <h2 className="text-base font-bold text-zinc-900 uppercase tracking-widest">Workout this week</h2>
+                    {!isNewUser && (
+                        <button
+                            onClick={() => setIsWorkoutThisWeekOpen(true)}
+                            className="text-xs font-bold text-lime-500 hover:text-lime-600 transition-colors uppercase tracking-wider"
+                        >
+                            View All
+                        </button>
+                    )}
                 </div>
 
                 {isLoadingWorkouts ? (
@@ -223,6 +232,12 @@ export default function Workouts({ isNewUser }) {
             {isExercisesListOpen && (
                 <ExercisesList
                     onClose={() => setIsExercisesListOpen(false)}
+                />
+            )}
+
+            {isWorkoutThisWeekOpen && (
+                <WorkoutThisWeekList
+                    onClose={() => setIsWorkoutThisWeekOpen(false)}
                 />
             )}
 
