@@ -14,7 +14,7 @@ export default function WorkoutThisWeekList({ onClose }) {
     const weeklyWorkouts = [
         {
             id: 'sun',
-            title: "Sunday: Active Recovery",
+            title: "Active Recovery",
             date: "22 Feb 2026 at 10:00",
             duration: "00:45:00",
             activeTags: ["RECOVERY", "CORE"],
@@ -29,7 +29,7 @@ export default function WorkoutThisWeekList({ onClose }) {
         },
         {
             id: 'mon',
-            title: "Monday: Lower Body Power",
+            title: "Lower Body Power",
             date: "16 Feb 2026 at 17:00",
             duration: "01:30:15",
             activeTags: ["LEGS", "GLUTES"],
@@ -43,7 +43,7 @@ export default function WorkoutThisWeekList({ onClose }) {
         },
         {
             id: 'tue',
-            title: "Tuesday: Push (Chest, Shoulders & Triceps)",
+            title: "Push (Chest, Shoulders & Triceps)",
             date: "17 Feb 2026 at 18:00",
             duration: "01:15:22",
             activeTags: ["CHEST", "SHOULDERS", "TRICEPS"],
@@ -58,7 +58,7 @@ export default function WorkoutThisWeekList({ onClose }) {
         },
         {
             id: 'wed',
-            title: "Wednesday: Core & Cardio Fusion",
+            title: "Core & Cardio Fusion",
             date: "18 Feb 2026 at 07:00",
             duration: "00:55:10",
             activeTags: ["CARDIO", "CORE"],
@@ -73,7 +73,7 @@ export default function WorkoutThisWeekList({ onClose }) {
         },
         {
             id: 'thu',
-            title: "Thursday: Pull (Back & Biceps)",
+            title: "Pull (Back & Biceps)",
             date: "19 Feb 2026 at 18:30",
             duration: "01:15:45",
             activeTags: ["BACK", "BICEPS"],
@@ -87,7 +87,7 @@ export default function WorkoutThisWeekList({ onClose }) {
         },
         {
             id: 'fri',
-            title: "Friday: Full Body Conditioning",
+            title: "Full Body Conditioning",
             date: "20 Feb 2026 at 17:30",
             duration: "01:00:05",
             activeTags: ["FULL BODY"],
@@ -102,7 +102,7 @@ export default function WorkoutThisWeekList({ onClose }) {
         },
         {
             id: 'sat',
-            title: "Saturday: Outdoor Run & Mobility",
+            title: "Outdoor Run & Mobility",
             date: "21 Feb 2026 at 08:00",
             duration: "01:20:00",
             activeTags: ["CARDIO", "RECOVERY"],

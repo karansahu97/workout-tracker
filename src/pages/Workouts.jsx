@@ -32,7 +32,7 @@ export default function Workouts({ isNewUser }) {
         const mockData = [
             {
                 id: 1,
-                title: "Day 2: Pull (Back & Biceps)",
+                title: "Pull (Back & Biceps)",
                 date: "18 Feb 2026 at 15:27",
                 duration: "00:50:33",
                 activeTags: ["BACK", "CORE", "LEGS"],
@@ -46,7 +46,7 @@ export default function Workouts({ isNewUser }) {
             },
             {
                 id: 2,
-                title: "Day 1: Lower Body Power",
+                title: "Lower Body Power",
                 date: "16 Feb 2026 at 14:46",
                 duration: "00:50:03",
                 activeTags: ["CHEST", "CORE", "SHOULDERS", "TRICEPS"],
