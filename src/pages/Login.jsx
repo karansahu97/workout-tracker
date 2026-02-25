@@ -18,7 +18,7 @@ export default function Login({ onLogin }) {
             return;
         }
 
-        const mappedEmail = 'karansahu@workout.local';
+        const mappedEmail = 'karansahu@workout-tracker.com';
 
         try {
             // Attempt to sign in
