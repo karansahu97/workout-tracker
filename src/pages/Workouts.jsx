@@ -9,6 +9,7 @@ import PlanDetails from './PlanDetails';
 import ActiveWorkout from './ActiveWorkout';
 import WorkoutSummary from './WorkoutSummary';
 import StepsDetails from './StepsDetails';
+import MyExercises from '../components/MyExercises';
 
 export default function Workouts({ isNewUser }) {
     const [selectedWorkout, setSelectedWorkout] = useState(null);
@@ -82,6 +83,7 @@ export default function Workouts({ isNewUser }) {
 
             <ActivityRings isNewUser={isNewUser} />
             <StreakWidget isNewUser={isNewUser} onClick={() => setIsStepsDetailsOpen(true)} />
+            <MyExercises />
 
             <div className="mb-8 relative">
                 <div className="flex justify-between items-center mb-4">
