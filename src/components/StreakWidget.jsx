@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Flame, Footprints, Check } from 'lucide-react';
 
-export default function StreakWidget({ isNewUser }) {
+export default function StreakWidget({ isNewUser, onClick }) {
     // Week days matching the provided mockup
     const days = [
         { name: 'Mon', active: true },
@@ -28,7 +28,10 @@ export default function StreakWidget({ isNewUser }) {
     }, [progress]);
 
     return (
-        <div className="bg-white rounded-3xl p-6 shadow-sm border border-black/5 mb-6 w-full animate-in fade-in zoom-in-95 duration-500">
+        <div
+            onClick={onClick}
+            className="bg-white rounded-3xl p-6 shadow-sm border border-black/5 mb-6 w-full animate-in fade-in zoom-in-95 duration-500 cursor-pointer active:scale-[0.98] transition-transform"
+        >
             {/* Top row: Flame, Streak text, Shoe icon */}
             <div className="flex justify-between items-start mb-8">
                 <div className="flex items-center space-x-4">
@@ -58,10 +61,10 @@ export default function StreakWidget({ isNewUser }) {
                         <div key={day.name} className="flex flex-col items-center">
                             <div
                                 className={`w-7 h-7 rounded-full flex items-center justify-center mb-2.5 transition-all duration-500 ${isActive
-                                        ? 'bg-[#23C91F] text-white shadow-[0_2px_10px_rgba(35,201,31,0.3)]'
-                                        : isToday && !isNewUser
-                                            ? 'border-2 border-[#23C91F] text-transparent'
-                                            : 'bg-[#EAECEF] text-transparent'
+                                    ? 'bg-[#23C91F] text-white shadow-[0_2px_10px_rgba(35,201,31,0.3)]'
+                                    : isToday && !isNewUser
+                                        ? 'border-2 border-[#23C91F] text-transparent'
+                                        : 'bg-[#EAECEF] text-transparent'
                                     }`}
                             >
                                 {isActive && <Check size={14} strokeWidth={4} />}
