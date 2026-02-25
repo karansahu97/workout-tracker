@@ -187,7 +187,7 @@ export default function DailyActivityDetails({ onClose, isNewUser }) {
                             {stepsData.map((val, idx) => (
                                 <div
                                     key={`steps-${idx}`}
-                                    className="w-1 bg-[#23C91F] rounded-t-full transition-all duration-1000 origin-bottom"
+                                    className="w-2 bg-[#23C91F] rounded-t-full transition-all duration-1000 origin-bottom"
                                     style={{ height: animated ? `${val}%` : '0%' }}
                                 />
                             ))}
@@ -208,7 +208,7 @@ export default function DailyActivityDetails({ onClose, isNewUser }) {
                             {timeData.map((val, idx) => (
                                 <div
                                     key={`time-${idx}`}
-                                    className="w-1 bg-[#419EF9] rounded-t-full transition-all duration-1000 origin-bottom"
+                                    className="w-2 bg-[#419EF9] rounded-t-full transition-all duration-1000 origin-bottom"
                                     style={{ height: animated ? `${val}%` : '0%' }}
                                 />
                             ))}
@@ -229,7 +229,7 @@ export default function DailyActivityDetails({ onClose, isNewUser }) {
                             {kcalData.map((val, idx) => (
                                 <div
                                     key={`kcal-${idx}`}
-                                    className="w-1 bg-[#FA2F68] rounded-t-full transition-all duration-1000 origin-bottom"
+                                    className="w-2 bg-[#FA2F68] rounded-t-full transition-all duration-1000 origin-bottom"
                                     style={{ height: animated ? `${val}%` : '0%' }}
                                 />
                             ))}
