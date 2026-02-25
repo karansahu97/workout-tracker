@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronLeft, Plus, MoreVertical, Star, Bike, Footprints, Orbit, Dumbbell, Activity, PersonStanding, Flame } from 'lucide-react';
 
-export default function ExercisesList({ onClose }) {
+export default function ExercisesList() {
     const [animated, setAnimated] = useState(false);
 
     useEffect(() => {
@@ -27,14 +27,11 @@ export default function ExercisesList({ onClose }) {
     ];
 
     return (
-        <div className="fixed inset-0 z-50 bg-[#F4F5F7] overflow-y-auto animate-in slide-in-from-right-full duration-300 pb-10">
+        <div className="animate-in fade-in duration-500 pb-10">
             {/* Header */}
-            <div className="sticky top-0 bg-[#F4F5F7]/90 backdrop-blur-md z-10 px-4 py-4 flex items-center justify-between border-b border-black/5">
+            <div className="mb-6 flex items-center justify-between">
                 <div className="flex items-center space-x-4">
-                    <button onClick={onClose} className="w-10 h-10 -ml-2 rounded-full flex items-center justify-center text-zinc-900 active:bg-zinc-200 transition-colors">
-                        <ChevronLeft size={24} />
-                    </button>
-                    <h1 className="text-xl font-bold text-zinc-900 tracking-tight">My exercises</h1>
+                    <h1 className="text-xl font-bold text-zinc-900 tracking-tight uppercase">Library</h1>
                 </div>
                 <div className="flex items-center space-x-1 text-zinc-900">
                     <button className="w-10 h-10 rounded-full flex items-center justify-center active:bg-zinc-200 transition-colors">

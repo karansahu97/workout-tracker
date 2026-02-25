@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ChevronLeft } from 'lucide-react';
 import WorkoutCard from '../components/WorkoutCard';
 
-export default function WorkoutThisWeekList({ onClose }) {
+export default function WorkoutThisWeekList() {
     const [animated, setAnimated] = useState(false);
     const [selectedWorkout, setSelectedWorkout] = useState(null);
 
@@ -117,16 +117,13 @@ export default function WorkoutThisWeekList({ onClose }) {
     ];
 
     return (
-        <div className="fixed inset-0 z-50 bg-[#F8F9FA] overflow-y-auto animate-in slide-in-from-right-full duration-300 pb-10">
+        <div className="animate-in fade-in duration-500 pb-10">
             {/* Header */}
-            <div className="sticky top-0 bg-[#F8F9FA]/90 backdrop-blur-md z-10 px-4 py-4 flex items-center border-b border-black/5">
-                <button onClick={onClose} className="w-10 h-10 -ml-2 rounded-full flex items-center justify-center text-zinc-900 active:bg-zinc-200 transition-colors mr-2">
-                    <ChevronLeft size={24} />
-                </button>
-                <h1 className="text-xl font-bold text-zinc-900 tracking-tight uppercase">Workout this week</h1>
+            <div className="mb-6">
+                <h1 className="text-xl font-bold text-zinc-900 tracking-tight uppercase">Training Log</h1>
             </div>
 
-            <div className={`px-4 mt-6 transition-all duration-700 ${animated ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+            <div className={`transition-all duration-700 ${animated ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
                 {weeklyWorkouts.map((workout, index) => (
                     <div
                         key={workout.id}

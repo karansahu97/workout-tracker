@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Target, ChevronRight, Play, X, Plus } from 'lucide-react';
-import ActivityRings from '../components/ActivityRings';
 import StreakWidget from '../components/StreakWidget';
 import WorkoutCard from '../components/WorkoutCard';
 import TrainingPlan from '../components/TrainingPlan';
@@ -8,11 +7,7 @@ import WorkoutDetails from './WorkoutDetails';
 import PlanDetails from './PlanDetails';
 import ActiveWorkout from './ActiveWorkout';
 import WorkoutSummary from './WorkoutSummary';
-import StepsDetails from './StepsDetails';
 import MyExercises from '../components/MyExercises';
-import ExercisesList from './ExercisesList';
-import WorkoutThisWeekList from './WorkoutThisWeekList';
-import DailyActivityDetails from './DailyActivityDetails';
 
 export default function Workouts({ isNewUser }) {
     const [selectedWorkout, setSelectedWorkout] = useState(null);
@@ -22,10 +17,6 @@ export default function Workouts({ isNewUser }) {
     const [isWorkoutSummaryOpen, setIsWorkoutSummaryOpen] = useState(false);
     const [recentWorkouts, setRecentWorkouts] = useState([]);
     const [isLoadingWorkouts, setIsLoadingWorkouts] = useState(true);
-    const [isStepsDetailsOpen, setIsStepsDetailsOpen] = useState(false);
-    const [isExercisesListOpen, setIsExercisesListOpen] = useState(false);
-    const [isWorkoutThisWeekOpen, setIsWorkoutThisWeekOpen] = useState(false);
-    const [isDailyActivityDetailsOpen, setIsDailyActivityDetailsOpen] = useState(false);
 
     useEffect(() => {
         // Load mock data to explore the app without backend dependencies
@@ -86,25 +77,12 @@ export default function Workouts({ isNewUser }) {
                 </div>
             )}
 
-
-            <ActivityRings
-                isNewUser={isNewUser}
-                onClick={() => setIsDailyActivityDetailsOpen(true)}
-            />
-            <StreakWidget isNewUser={isNewUser} onClick={() => setIsStepsDetailsOpen(true)} />
-            <MyExercises onButtonClick={() => setIsExercisesListOpen(true)} />
+            <StreakWidget isNewUser={isNewUser} />
+            <MyExercises />
 
             <div className="mb-8 relative">
                 <div className="flex justify-between items-center mb-4">
                     <h2 className="text-base font-bold text-zinc-900 uppercase tracking-widest">Workout this week</h2>
-                    {!isNewUser && (
-                        <button
-                            onClick={() => setIsWorkoutThisWeekOpen(true)}
-                            className="text-xs font-bold text-lime-500 hover:text-lime-600 transition-colors uppercase tracking-wider"
-                        >
-                            View All
-                        </button>
-                    )}
                 </div>
 
                 {isLoadingWorkouts ? (
@@ -224,32 +202,6 @@ export default function Workouts({ isNewUser }) {
             {isWorkoutSummaryOpen && (
                 <WorkoutSummary
                     onClose={() => setIsWorkoutSummaryOpen(false)}
-                />
-            )}
-
-            {isStepsDetailsOpen && (
-                <StepsDetails
-                    isNewUser={isNewUser}
-                    onClose={() => setIsStepsDetailsOpen(false)}
-                />
-            )}
-
-            {isDailyActivityDetailsOpen && (
-                <DailyActivityDetails
-                    isNewUser={isNewUser}
-                    onClose={() => setIsDailyActivityDetailsOpen(false)}
-                />
-            )}
-
-            {isExercisesListOpen && (
-                <ExercisesList
-                    onClose={() => setIsExercisesListOpen(false)}
-                />
-            )}
-
-            {isWorkoutThisWeekOpen && (
-                <WorkoutThisWeekList
-                    onClose={() => setIsWorkoutThisWeekOpen(false)}
                 />
             )}
 

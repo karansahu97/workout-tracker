@@ -1,10 +1,11 @@
 import React from 'react';
-import { Dumbbell, LayoutGrid, User } from 'lucide-react';
+import { Home, History, BookOpen, User } from 'lucide-react';
 
 export default function BottomNav({ activeTab, setActiveTab }) {
     const navItems = [
-        { id: 'workouts', icon: Dumbbell, label: 'Train' },
-        { id: 'plans', icon: LayoutGrid, label: 'Plans' },
+        { id: 'home', icon: Home, label: 'Home' },
+        { id: 'log', icon: History, label: 'Log' },
+        { id: 'library', icon: BookOpen, label: 'Library' },
         { id: 'profile', icon: User, label: 'Profile' },
     ];
 

@@ -3,13 +3,14 @@ import Header from './components/Header';
 import BottomNav from './components/BottomNav';
 import Login from './pages/Login';
 import Workouts from './pages/Workouts';
-import Plans from './pages/Plans';
+import WorkoutThisWeekList from './pages/WorkoutThisWeekList';
+import ExercisesList from './pages/ExercisesList';
 import Profile from './pages/Profile';
 
 function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [isNewUser, setIsNewUser] = useState(false);
-    const [activeTab, setActiveTab] = useState('workouts');
+    const [activeTab, setActiveTab] = useState('home');
 
     if (!isAuthenticated) {
         return (
@@ -24,17 +25,19 @@ function App() {
 
     const renderContent = () => {
         switch (activeTab) {
-            case 'workouts':
+            case 'home':
                 return <Workouts isNewUser={isNewUser} />;
-            case 'plans':
-                return <Plans />;
+            case 'log':
+                return <WorkoutThisWeekList onClose={() => setActiveTab('home')} />;
+            case 'library':
+                return <ExercisesList onClose={() => setActiveTab('home')} />;
             case 'profile':
                 return (
                     <Profile
                         onLogout={() => {
                             setIsAuthenticated(false);
                             setIsNewUser(false);
-                            setActiveTab('workouts');
+                            setActiveTab('home');
                         }}
                     />
                 );
@@ -44,7 +47,7 @@ function App() {
     };
 
     return (
-        <div className="max-w-xl mx-auto min-h-screen bg-primary-dark pb-28 relative">
+        <div className="max-w-xl mx-auto min-h-screen bg-[#F4F5F7] pb-28 relative">
             <Header />
             <main className="px-4 py-6">
                 {renderContent()}
