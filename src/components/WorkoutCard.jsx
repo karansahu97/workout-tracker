@@ -1,57 +1,94 @@
 import React from 'react';
-import { Clock, ChevronRight } from 'lucide-react';
+import { Clock, ChevronRight, Flame, Dumbbell, Activity, PersonStanding } from 'lucide-react';
 
-export default function WorkoutCard({ date, duration, activeTag, title, kcal, movedKg, exercises, onClick }) {
+export default function WorkoutCard({ date, duration, activeTags = [], kcal, movedKg, exercises, onClick }) {
+
+    // Helper to pick border and text color for tags based on the tag name
+    const getTagStyles = (tag) => {
+        const upperTag = tag.toUpperCase();
+        switch (upperTag) {
+            case 'BACK':
+            case 'CHEST':
+                return 'border-[#23C91F] text-[#23C91F]'; // Lime Green
+            case 'CORE':
+                return 'border-purple-500 text-purple-600';
+            case 'LEGS':
+                return 'border-[#419EF9] text-[#419EF9]'; // Electric Blue
+            case 'SHOULDERS':
+                return 'border-[#FA2F68] text-[#FA2F68]'; // Neon Crimson
+            case 'TRICEPS':
+            case 'BICEPS':
+                return 'border-orange-500 text-orange-600';
+            default:
+                return 'border-zinc-400 text-zinc-500';
+        }
+    };
+
     return (
         <div
             onClick={onClick}
-            className="bg-surface rounded-2xl p-5 shadow-soft mb-4 flex items-center justify-between cursor-pointer active:scale-[0.98] transition-all hover:bg-zinc-50"
+            className="bg-white rounded-[24px] p-5 shadow-sm border border-black/5 mb-4 flex flex-col cursor-pointer active:scale-[0.98] transition-all hover:bg-zinc-50"
         >
-            <div className="flex-1">
-                <div className="flex items-center space-x-2 mb-2">
-                    <span className="text-xs font-medium text-zinc-400">{date}</span>
-                    <div className="flex items-center text-xs text-zinc-400 space-x-1">
-                        <Clock size={12} />
-                        <span>{duration}</span>
+            <div className="flex justify-between items-start mb-4">
+                <div>
+                    <span className="text-sm font-bold text-zinc-500 block mb-1">{date}</span>
+                    <div className="flex items-center text-zinc-900 tracking-tight">
+                        <Clock size={18} className="mr-2" strokeWidth={2.5} />
+                        <span className="text-2xl font-bold font-mono">{duration}</span>
+                    </div>
+                </div>
+                <div className="text-zinc-300 mt-2">
+                    <ChevronRight size={24} />
+                </div>
+            </div>
+
+            <div className="grid grid-cols-3 gap-2 mb-4 border-b border-black/5 pb-5">
+                {/* Total Kcal */}
+                <div>
+                    <div className="flex items-center text-[10px] font-bold text-zinc-400 uppercase tracking-widest mb-1.5">
+                        <Flame size={12} className="mr-1" />
+                        Total
+                    </div>
+                    <div className="flex items-baseline">
+                        <span className="text-xl font-bold text-zinc-900 tracking-tight">{kcal}</span>
+                        <span className="text-[10px] font-bold text-zinc-500 ml-1">KCAL</span>
                     </div>
                 </div>
 
-                <h3 className="text-base font-bold text-zinc-900 mb-3">{title}</h3>
-
-                <div className="flex items-center space-x-2 mb-3">
-                    {(() => {
-                        let colorClass = "bg-accent-orange/10 text-accent-orange"; // default
-                        if (activeTag === "Legs") colorClass = "bg-accent-blue/10 text-accent-blue";
-                        if (activeTag === "Cardio") colorClass = "bg-accent-crimson/10 text-accent-crimson";
-                        if (activeTag === "Full Body") colorClass = "bg-accent-purple/10 text-accent-purple";
-                        if (activeTag === "BACK") colorClass = "bg-yellow-500/15 text-yellow-600";
-
-                        return (
-                            <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-full ${colorClass}`}>
-                                {activeTag}
-                            </span>
-                        );
-                    })()}
+                {/* Moved Kg */}
+                <div>
+                    <div className="flex items-center text-[10px] font-bold text-zinc-400 uppercase tracking-widest mb-1.5">
+                        <Dumbbell size={12} className="mr-1" />
+                        Moved
+                    </div>
+                    <div className="flex items-baseline">
+                        <span className="text-xl font-bold text-zinc-900 tracking-tight">{movedKg}</span>
+                        <span className="text-[10px] font-bold text-zinc-500 ml-1">KG</span>
+                    </div>
                 </div>
 
-                <div className="grid grid-cols-3 gap-2 text-left">
-                    <div>
-                        <div className="text-[10px] text-zinc-400 uppercase tracking-wide mb-1">KCAL</div>
-                        <div className="text-sm font-mono font-medium">{kcal}</div>
+                {/* Exercises */}
+                <div>
+                    <div className="flex items-center text-[10px] font-bold text-zinc-400 uppercase tracking-widest mb-1.5">
+                        <PersonStanding size={12} className="mr-1" />
+                        Exercises
                     </div>
-                    <div>
-                        <div className="text-[10px] text-zinc-400 uppercase tracking-wide mb-1">KG MOVED</div>
-                        <div className="text-sm font-mono font-medium">{movedKg}</div>
-                    </div>
-                    <div>
-                        <div className="text-[10px] text-zinc-400 uppercase tracking-wide mb-1">EXERCISES</div>
-                        <div className="text-sm font-mono font-medium">{exercises}</div>
+                    <div className="text-xl font-bold text-zinc-900 tracking-tight">
+                        {exercises}
                     </div>
                 </div>
             </div>
 
-            <div className="ml-4 text-zinc-300">
-                <ChevronRight size={20} />
+            {/* Muscle Group Tags */}
+            <div className="flex flex-wrap gap-2">
+                {activeTags.map((tag, idx) => (
+                    <span
+                        key={idx}
+                        className={`text-[10px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full border border-opacity-50 ${getTagStyles(tag)}`}
+                    >
+                        {tag}
+                    </span>
+                ))}
             </div>
         </div>
     );
