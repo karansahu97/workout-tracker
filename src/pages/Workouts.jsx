@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Target, ChevronRight, Play, X, Plus } from 'lucide-react';
-import Heatmap from '../components/Heatmap';
+import ActivityRings from '../components/ActivityRings';
 import WorkoutCard from '../components/WorkoutCard';
 import TrainingPlan from '../components/TrainingPlan';
 import WorkoutDetails from './WorkoutDetails';
@@ -96,7 +96,7 @@ export default function Workouts({ isNewUser }) {
                 </div>
             )}
 
-            <Heatmap isNewUser={isNewUser} />
+            <ActivityRings isNewUser={isNewUser} />
 
             <div className="mb-8 relative">
                 <div className="flex justify-between items-center mb-4">
