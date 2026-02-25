@@ -1,35 +1,17 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { supabase } from '../lib/supabaseClient';
-import { LogOut, Settings, Award, Edit2, Camera } from 'lucide-react';
+import React, { useState, useRef } from 'react';
+import { LogOut, Settings, Award, Camera } from 'lucide-react';
 
-export default function Profile({ onLogout, session }) {
+export default function Profile({ onLogout }) {
     const [profilePic, setProfilePic] = useState(null);
-    const [profile, setProfile] = useState(null);
-    const [isLoading, setIsLoading] = useState(true);
     const fileInputRef = useRef(null);
 
-    useEffect(() => {
-        async function fetchProfile() {
-            try {
-                if (!session?.user?.id) return;
+    const profile = {
+        full_name: 'Karan Sahu',
+        username: 'karansahu',
+        avatar_url: null
+    };
 
-                const { data, error } = await supabase
-                    .from('profiles')
-                    .select('*')
-                    .eq('id', session.user.id)
-                    .single();
-
-                if (error) throw error;
-                if (data) setProfile(data);
-            } catch (error) {
-                console.error('Error fetching profile:', error.message);
-            } finally {
-                setIsLoading(false);
-            }
-        }
-
-        fetchProfile();
-    }, [session]);
+    const isLoading = false;
 
     const handleImageUpload = (e) => {
         const file = e.target.files[0];

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { supabase } from '../lib/supabaseClient';
 
 export default function Login({ onLogin }) {
     const [userId, setUserId] = useState('');
@@ -12,50 +11,15 @@ export default function Login({ onLogin }) {
         setError('');
         setIsLoading(true);
 
-        if (userId !== 'karansahu' || password !== 'karan1234') {
-            setError('Invalid User ID or Password');
-            setIsLoading(false);
-            return;
-        }
-
-        const mappedEmail = 'karansahu@workout-tracker.com';
-
-        try {
-            // Attempt to sign in
-            let { error: signInError } = await supabase.auth.signInWithPassword({
-                email: mappedEmail,
-                password: password,
-            });
-
-            if (signInError && signInError.message.includes('Invalid login credentials')) {
-                // User might not exist yet, auto-create
-                const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
-                    email: mappedEmail,
-                    password: password,
-                });
-
-                if (signUpError) throw signUpError;
-
-                // Ensure profile exists in database
-                if (signUpData?.user) {
-                    await supabase.from('profiles').insert([{
-                        id: signUpData.user.id,
-                        full_name: 'Karan Sahu',
-                        username: 'karansahu',
-                        updated_at: new Date().toISOString()
-                    }]);
-                }
-            } else if (signInError) {
-                throw signInError;
+        // Simulate a slight network delay for the loading animation UX
+        setTimeout(() => {
+            if (userId === 'karansahu' && password === 'karan1234') {
+                onLogin(true); // Successfully authenticated
+            } else {
+                setError('Invalid User ID or Password');
             }
-
-            // Successfully authenticated
-            onLogin(false);
-        } catch (error) {
-            setError(error.message);
-        } finally {
             setIsLoading(false);
-        }
+        }, 800);
     };
 
     return (

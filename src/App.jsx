@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { supabase } from './lib/supabaseClient';
+import React, { useState } from 'react';
 import Header from './components/Header';
 import BottomNav from './components/BottomNav';
 import Login from './pages/Login';
@@ -8,40 +7,16 @@ import Plans from './pages/Plans';
 import Profile from './pages/Profile';
 
 function App() {
-    const [session, setSession] = useState(null);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [isNewUser, setIsNewUser] = useState(false);
     const [activeTab, setActiveTab] = useState('workouts');
-    const [isLoading, setIsLoading] = useState(true);
 
-    useEffect(() => {
-        // Check active session
-        supabase.auth.getSession().then(({ data: { session } }) => {
-            setSession(session);
-            setIsLoading(false);
-        });
-
-        // Listen for auth changes
-        const {
-            data: { subscription },
-        } = supabase.auth.onAuthStateChange((_event, session) => {
-            setSession(session);
-        });
-
-        return () => subscription.unsubscribe();
-    }, []);
-
-    if (isLoading) {
-        return <div className="min-h-screen bg-primary-dark flex items-center justify-center">
-            <div className="w-8 h-8 border-4 border-lime-500 border-t-transparent rounded-full animate-spin"></div>
-        </div>;
-    }
-
-    if (!session) {
+    if (!isAuthenticated) {
         return (
             <Login
                 onLogin={(isNew) => {
+                    setIsAuthenticated(true);
                     setIsNewUser(isNew || false);
-                    // App state updates automatically via onAuthStateChange
                 }}
             />
         );
@@ -56,12 +31,11 @@ function App() {
             case 'profile':
                 return (
                     <Profile
-                        onLogout={async () => {
-                            await supabase.auth.signOut();
+                        onLogout={() => {
+                            setIsAuthenticated(false);
                             setIsNewUser(false);
                             setActiveTab('workouts');
                         }}
-                        session={session}
                     />
                 );
             default:

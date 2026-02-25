@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { supabase } from '../lib/supabaseClient';
 import { CheckCircle2, Trophy, Clock, Flame, X } from 'lucide-react';
 
 export default function WorkoutSummary({ onClose }) {
@@ -14,31 +13,12 @@ export default function WorkoutSummary({ onClose }) {
     const [isSaving, setIsSaving] = useState(true);
 
     useEffect(() => {
-        async function saveWorkout() {
-            try {
-                const { data: { session } } = await supabase.auth.getSession();
-                if (!session?.user?.id) return;
+        // Simulate saving to local storage or state
+        const saveTimer = setTimeout(() => {
+            setIsSaving(false);
+        }, 1000);
 
-                const { error } = await supabase.from('workouts').insert([
-                    {
-                        user_id: session.user.id,
-                        title: summaryData.title,
-                        duration: summaryData.duration,
-                        kcal: summaryData.kcal,
-                        volume: summaryData.volume,
-                        prs: summaryData.prs
-                    }
-                ]);
-
-                if (error) throw error;
-            } catch (error) {
-                console.error("Error saving workout:", error.message);
-            } finally {
-                setIsSaving(false);
-            }
-        }
-
-        saveWorkout();
+        return () => clearTimeout(saveTimer);
     }, []);
 
     return (

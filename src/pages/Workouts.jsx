@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { supabase } from '../lib/supabaseClient';
 import { Target, ChevronRight, Play, X, Plus } from 'lucide-react';
 import Heatmap from '../components/Heatmap';
 import WorkoutCard from '../components/WorkoutCard';
@@ -9,7 +8,7 @@ import PlanDetails from './PlanDetails';
 import ActiveWorkout from './ActiveWorkout';
 import WorkoutSummary from './WorkoutSummary';
 
-export default function Workouts({ isNewUser, session }) {
+export default function Workouts({ isNewUser }) {
     const [selectedWorkout, setSelectedWorkout] = useState(null);
     const [selectedPlan, setSelectedPlan] = useState(null);
     const [isActiveWorkout, setIsActiveWorkout] = useState(false);
@@ -19,41 +18,43 @@ export default function Workouts({ isNewUser, session }) {
     const [isLoadingWorkouts, setIsLoadingWorkouts] = useState(true);
 
     useEffect(() => {
-        async function fetchWorkouts() {
-            if (!session?.user?.id) return;
-
-            try {
-                const { data, error } = await supabase
-                    .from('workouts')
-                    .select('*')
-                    .eq('user_id', session.user.id)
-                    .order('created_at', { ascending: false });
-
-                if (error) throw error;
-
-                // Format data for the UI
-                const formattedWorkouts = data.map(workout => ({
-                    id: workout.id,
-                    title: workout.title,
-                    date: new Date(workout.created_at).toLocaleDateString() + ', ' + new Date(workout.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-                    duration: workout.duration || '0m',
-                    activeTag: "Custom",
-                    kcal: workout.kcal?.toString() || '0',
-                    movedKg: workout.volume?.toLocaleString() || '0',
-                    exercises: "0",
-                    exercisesList: [] // We aren't storing deep exercise JSON yet in this schema
-                }));
-
-                setRecentWorkouts(formattedWorkouts);
-            } catch (error) {
-                console.error("Error fetching workouts:", error.message);
-            } finally {
-                setIsLoadingWorkouts(false);
+        // Load mock data to explore the app without backend dependencies
+        const mockData = [
+            {
+                id: 1,
+                title: "Day 2: Push (Chest, Shoulders, Triceps)",
+                date: "Yesterday, 18:30",
+                duration: "1h 15m",
+                activeTag: "Hypertrophy",
+                kcal: "450",
+                movedKg: "8,500",
+                exercises: "6",
+                exercisesList: [
+                    { name: "Incline Dumbbell Press", id: 1 },
+                    { name: "Overhead Press", id: 2 },
+                ]
+            },
+            {
+                id: 2,
+                title: "Day 1: Lower Body Power",
+                date: "Monday, 17:00",
+                duration: "1h 30m",
+                activeTag: "Power",
+                kcal: "600",
+                movedKg: "12,200",
+                exercises: "5",
+                exercisesList: [
+                    { name: "Barbell Squats", id: 3 },
+                    { name: "Romanian Deadlifts", id: 4 },
+                ]
             }
-        }
+        ];
 
-        fetchWorkouts();
-    }, [session]);
+        setTimeout(() => {
+            setRecentWorkouts(isNewUser ? [] : mockData);
+            setIsLoadingWorkouts(false);
+        }, 500);
+    }, [isNewUser]);
 
     const [activePlan, setActivePlan] = useState({
         title: isNewUser ? "Hypertrophy Foundation Phase 1" : "Powerbuilding Phase 1",
