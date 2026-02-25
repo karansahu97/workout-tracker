@@ -9,8 +9,8 @@ export default function StepsDetails({ onClose, isNewUser }) {
     }, []);
 
     // Mock data based on the screenshot, adapted for the user state
-    const currentSteps = isNewUser ? 0 : 2383;
-    const targetSteps = 6000;
+    const currentSteps = isNewUser ? 0 : 6825;
+    const targetSteps = 10000;
     const progressPct = Math.min((currentSteps / targetSteps) * 100, 100);
     const distanceKm = isNewUser ? "0.00" : "1.88";
     const kcal = isNewUser ? 0 : 106;
@@ -67,8 +67,8 @@ export default function StepsDetails({ onClose, isNewUser }) {
                 <div className="relative h-40 mb-8 border-b border-black/5 flex items-end pb-8">
                     {/* Y-axis Labels */}
                     <div className="absolute right-0 top-0 bottom-8 flex flex-col justify-between text-[10px] font-bold text-[#23C91F] opacity-80 text-right">
-                        <span>6,000</span>
-                        <span className="text-[#7B7B98]">3,000</span>
+                        <span>10,000</span>
+                        <span className="text-[#7B7B98]">5,000</span>
                         <span></span>
                     </div>
 

@@ -11,11 +11,11 @@ export default function ActivityRings({ isNewUser }) {
     }, []);
 
     // Values matched to the reference screenshot
-    const displaySteps = isNewUser ? 0 : 2369;
+    const displaySteps = isNewUser ? 0 : 6825;
     const displayMins = isNewUser ? 0 : 25;
     const displayKcal = isNewUser ? 0 : 106;
 
-    const stepsGoal = 3200; // Calibrated to hit roughly the same ~75% ring position as screenshot
+    const stepsGoal = 10000; // Calibrated to hit roughly the same ~75% ring position as screenshot
     const minsGoal = 50;    // ~50%
     const kcalGoal = 400;   // ~25%
 
