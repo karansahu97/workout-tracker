@@ -77,25 +77,6 @@ export default function Workouts({ isNewUser }) {
                 </div>
             )}
 
-            {/* Weekly Goal Widget (UX Flow: Set and track your goals) */}
-            {!isNewUser && (
-                <div className="bg-surface rounded-3xl p-5 shadow-soft border border-black/5 mb-6 flex items-center justify-between">
-                    <div className="flex items-center space-x-4">
-                        <div className="relative w-12 h-12 flex items-center justify-center">
-                            <svg className="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
-                                <path className="text-zinc-100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" strokeWidth="4" />
-                                <path className="text-lime-500 drop-shadow-sm transition-all duration-1000 ease-out" strokeDasharray={`${(weeklyGoal.completed / weeklyGoal.total) * 100}, 100`} d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" />
-                            </svg>
-                            <Target size={18} className="absolute text-lime-600" />
-                        </div>
-                        <div>
-                            <h3 className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest mb-0.5">Weekly Goal</h3>
-                            <p className="text-sm font-bold text-zinc-900">{weeklyGoal.completed} of {weeklyGoal.total} Workouts</p>
-                        </div>
-                    </div>
-                    <ChevronRight size={20} className="text-zinc-300" />
-                </div>
-            )}
 
             <ActivityRings isNewUser={isNewUser} />
             <StreakWidget isNewUser={isNewUser} />
